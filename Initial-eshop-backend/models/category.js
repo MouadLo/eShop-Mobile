@@ -1,29 +1,29 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose"
 
 const categorySchema = mongoose.Schema({
     name: {
-      type: String,
-      required: true
+        type: String,
+        required: true,
     },
     color: {
-      type: String,
-        
-      },
+        type: String,
+    },
     icon: {
-      type: String,
-      
+        type: String,
     },
     image: {
-      type: String,
-     
-    }
+        type: String,
+    },
 })
 
-categorySchema.virtual('id').get(function () {
-  return this._id.toHexString()
+categorySchema.virtual("id").get(function () {
+    return this._id.toHexString()
 })
 
-categorySchema.set('toJSON', {
-  virtuals: true
+categorySchema.set("toJSON", {
+    virtuals: true,
 })
-exports.Category = mongoose.model('Category', categorySchema);
+
+const Category = mongoose.model("Category", categorySchema)
+
+export default Category
