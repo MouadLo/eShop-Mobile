@@ -1,68 +1,71 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose"
 
 const productSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     description: {
         type: String,
-        required: true
+        required: true,
     },
     richDescription: {
         type: String,
-        default: ''
+        default: "",
     },
     image: {
         type: String,
-        default: ''
+        default: "",
     },
-    images: [{
-        type: String
-    }],
+    images: [
+        {
+            type: String,
+        },
+    ],
     brand: {
         type: String,
-        default: ''
+        default: "",
     },
     price: {
         type: Number,
-        default: 0
+        default: 0,
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
-        required: true
+        ref: "Category",
+        required: true,
     },
     countInStock: {
         type: Number,
         required: true,
         min: 0,
-        max: 999
+        max: 999,
     },
     rating: {
         type: Number,
-        default: 0
+        default: 0,
     },
     numReviews: {
         type: Number,
-        default: 0
+        default: 0,
     },
     isFeatured: {
         type: Boolean,
-        default: false
+        default: false,
     },
     dateCreated: {
         type: Date,
-        default : Date.now
-    }
+        default: Date.now,
+    },
 })
 
-productSchema.virtual('id').get(function () {
+productSchema.virtual("id").get(function () {
     return this._id.toHexString()
 })
 
-productSchema.set('toJSON', {
-    virtuals: true
+productSchema.set("toJSON", {
+    virtuals: true,
 })
+const Product = mongoose.model("Product", productSchema)
 
-exports.Product = mongoose.model('Product', productSchema);
+export default Product
